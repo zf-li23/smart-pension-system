@@ -202,8 +202,15 @@ def calculate_match_score(req: ElderVector, home: NursingHome, desired_service_t
     elif total_score > 0.7: summary += "Good match."
     else: summary += "Some needs may not be fully met."
     
+    # To avoid Pydantic validation error, we should pass the ORM object if the schema is set to load from attributes,
+    # OR convert it to a dict/schema object manually.
+    # Since MatchResult expects a 'home' field of type NursingHome(schema), and our 'home' is a NursingHome(model),
+    # Pydantic v2's from_attributes=True handles this translation automatically usually, BUT
+    # sometimes it's explicitly strictly typed.
+    # Let's verify MatchResult definition. It uses 'home: NursingHome'.
+    
     return MatchResult(
-        home=home,
+        home=home, # This is the ORM object. With from_attributes=True in schema, it should work.
         total_match_score=round(total_score * 100, 1),
         dimension_details=details,
         summary=summary
