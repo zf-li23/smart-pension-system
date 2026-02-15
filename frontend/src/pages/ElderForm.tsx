@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Form, InputNumber, Radio, Select, Button, Typography, Steps, Divider, message, Switch, Checkbox } from 'antd';
+import { Form, InputNumber, Radio, Select, Button, Typography, Divider, message, Switch } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const { Title } = Typography;
-const { Step } = Steps;
 
 const ElderForm: React.FC = () => {
     const [form] = Form.useForm();

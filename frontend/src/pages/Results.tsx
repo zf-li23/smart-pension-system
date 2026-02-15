@@ -35,7 +35,7 @@ const Results: React.FC = () => {
     const userNeeds = bestMatch ? bestMatch.dimension_details.slice(0, 4).map((d: any) => d.user_val) : [];
     
     // Extract Home Capabilities
-    const homeSeries = results.map((res: any, index: number) => {
+    const homeSeries = results.map((res: any) => {
         return {
             name: res.home.name,
             type: 'radar',

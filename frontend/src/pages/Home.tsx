@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Row, Col, Typography, Card } from 'antd';
+import { Row, Col, Typography, Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { UserOutlined, MedicineBoxOutlined } from '@ant-design/icons';
 
