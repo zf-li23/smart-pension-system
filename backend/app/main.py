@@ -5,7 +5,8 @@ from typing import List
 
 from . import models, schemas, crud, algorithm, database
 
-models.Base.metadata.create_all(bind=database.engine)
+# Remove top-level table creation to prevent errors during import in restricted environments
+# models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(title="Smart Pension System API")
 
@@ -27,7 +28,10 @@ def get_db():
 @app.on_event("startup")
 def startup_event():
     # Ensure database tables are created (especially if using /tmp which might be empty on new instance)
-    models.Base.metadata.create_all(bind=database.engine)
+    try:
+        models.Base.metadata.create_all(bind=database.engine)
+    except Exception as e:
+        print(f"Error creating tables: {e}")
     
     db = database.SessionLocal()
     try:
